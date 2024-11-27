@@ -1,12 +1,19 @@
-fetch('https://jsonplaceholder.typicode.com/users')
-      .then(response => response.json())
-    //   .then(json => console.log(json))
-      .then(json => json.forEach(element => {
-        console.log(element.name)
-      }))
+let userList = document.getElementById("user-list")
 
-fetch('https://jsonplaceholder.typicode.com/albums')
-      .then(response => response.json())
-      .then(json => json.forEach(element => {
-        console.log(element.title)
-      }))
+async function getUsers () {
+    const response = await fetch('https://jsonplaceholder.typicode.com/users')
+    
+    const json = await response.json();
+
+    console.log(json);
+
+    json.forEach(element => {
+        userName = document.createElement("li");
+        // userName.innerHTML = `<li>${element.name}</li>`;
+        userName.textContent = element.name;
+
+        userList.appendChild(userName);
+    });
+};
+
+getUsers();
